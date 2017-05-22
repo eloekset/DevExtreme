@@ -30,7 +30,11 @@ function formatISO8601(date, skipZeroTime, skipTimezone) {
     };
 
     var isZeroTime = function() {
-        return date.getHours() + date.getMinutes() + date.getSeconds() + date.getMilliseconds() < 1;
+        if(skipTimezone) {
+            return date.getHours() + date.getMinutes() + date.getSeconds() + date.getMilliseconds() < 1;
+        }
+
+        return date.getHours() + date.getMinutes() + date.getSeconds() + date.getMilliseconds() + date.getTimezoneOffset() < 1;
     };
 
     bag.push(date.getFullYear());
@@ -53,7 +57,21 @@ function formatISO8601(date, skipZeroTime, skipTimezone) {
         }
 
         if(!skipTimezone) {
-            bag.push("Z");
+            if(date.getTimezoneOffset() === 0) {
+                bag.push("Z");
+            } else {
+                if(date.getTimezoneOffset() > 0) {
+                    bag.push("-");
+                } else {
+                    bag.push("+");
+                }
+                var timezoneOffset = date.getTimezoneOffset(),
+                    offset = Math.abs(timezoneOffset),
+                    offsetHours = Math.floor(offset / 60),
+                    offsetMinutes = offset - offsetHours * 60;
+                bag.push(pad(offsetHours));
+                bag.push(pad(offsetMinutes));
+            }
         }
     }
 

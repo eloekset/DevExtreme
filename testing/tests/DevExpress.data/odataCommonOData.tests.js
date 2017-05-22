@@ -377,3 +377,10 @@ QUnit.test("T345624: The parseISO8601 function returns incorrect data for Februa
 
     assert.equal(r.data[0].date.getTime(), new Date(2016, 1, 29, 23, 59, 59, 999).getTime());
 });
+
+QUnit.test("T487901: ODataStore modifies date values on insert", function(assert) {
+    var r = interpretJsonFormat({
+        value: [{ date: "2017-03-01T11:06:48+0100" }]
+    }, "success");
+    assert.equal(r.data[0].date.getTime(), new Date(2017, 2, 1, 10, 6, 48).getTime());
+});

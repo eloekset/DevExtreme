@@ -875,6 +875,11 @@ declare module DevExpress {
             /** Specifies whether or not dates in a response are deserialized. */
             deserializeDates?: boolean;
 
+
+            /** Specifies wether local time zone should be included or stipped when serialized. */
+            ignoreTimeZone?: boolean;
+
+
             /** Specifies the URL of the data service being accessed via the current ODataContext. */
             url?: string;
 

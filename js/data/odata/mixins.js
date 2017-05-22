@@ -7,6 +7,7 @@ var $ = require("../../core/renderer"),
 require("./query_adapter");
 
 var DEFAULT_PROTOCOL_VERSION = 2;
+var DEFAULT_IGNORE_TIME_ZONE = true;  // Change to false in next major version, since it will be a breaking change.
 
 var formatFunctionInvocationUrl = function(baseUrl, args) {
     return stringUtils.format("{0}({1})",
@@ -43,6 +44,7 @@ var SharedMethods = {
         this._version = options.version || DEFAULT_PROTOCOL_VERSION;
         this._withCredentials = options.withCredentials;
         this._deserializeDates = options.deserializeDates;
+        this._ignoreTimeZone = options.ignoreTimeZone !== undefined ? options.ignoreTimeZone : DEFAULT_IGNORE_TIME_ZONE;
     },
 
     _sendRequest: function(url, method, params, payload) {
@@ -57,7 +59,8 @@ var SharedMethods = {
                 beforeSend: this._beforeSend,
                 jsonp: this._jsonp,
                 withCredentials: this._withCredentials,
-                deserializeDates: this._deserializeDates
+                deserializeDates: this._deserializeDates,
+                ignoreTimeZone: this._ignoreTimeZone
             }
         );
     },

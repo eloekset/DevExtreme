@@ -96,6 +96,12 @@ var ODataStore = Store.inherit({
          * @type boolean
          */
         /**
+         * @name ODataStoreOptions_ignoreTimeZone
+         * @publicName ignoreTimeZone
+         * @type boolean
+         * @default true
+         */
+        /**
          * @name ODataStoreOptions_onLoading
          * @publicName onLoading
          * @type_function_param1_field8 requireTotalCount:boolean
@@ -200,6 +206,7 @@ var ODataStore = Store.inherit({
             expand: loadOptions.expand,
             requireTotalCount: loadOptions.requireTotalCount,
             deserializeDates: this._deserializeDates,
+            ignoreTimeZone: this._ignoreTimeZone,
             fieldTypes: this._fieldTypes
         };
 

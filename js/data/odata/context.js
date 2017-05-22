@@ -58,6 +58,12 @@ var ODataContext = Class.inherit({
          * @publicName deserializeDates
          * @type boolean
          */
+        /**
+         * @name ODataStoreOptions_ignoreTimeZone
+         * @publicName ignoreTimeZone
+         * @type boolean
+         * @default true
+         */
         that._extractServiceOptions(options);
 
         /**
